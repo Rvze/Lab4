@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Item{
     protected String name;
     private String longname;
@@ -37,5 +39,20 @@ public class Item{
 
     public String getLongname() {
         return longname;
+    }
+    public int hashCode(){
+        return Objects.hash(getLongname(), getName());
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return isBroken == item.isBroken &&
+                isMineable == item.isMineable &&
+                Objects.equals(name, item.name) &&
+                Objects.equals(longname, item.longname);
     }
 }

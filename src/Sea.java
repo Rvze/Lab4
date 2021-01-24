@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Sea {
     private String name;
     public Sea(String name){
@@ -11,5 +13,16 @@ public class Sea {
     }
     public String getName() {
         return name;
+    }
+    public int hashCode(){
+        return Objects.hash(getName());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sea sea = (Sea) o;
+        return Objects.equals(name, sea.name);
     }
 }

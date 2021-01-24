@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public abstract class Character {
     private String name;
     private TypeOfPerson type;
@@ -19,5 +21,13 @@ public abstract class Character {
 
     public TypeOfPerson getType() {
         return type;
+    }
+    public int hashCode(){
+        return Objects.hash(getName(),getType());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Character && Objects.equals(getType(),getName());
     }
 }
