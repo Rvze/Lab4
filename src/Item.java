@@ -1,16 +1,53 @@
 import java.util.Objects;
 
-public class Item{
+public class Item {
     protected String name;
     private String longname;
-    private boolean isBroken=false;
-    private boolean isMineable=false;
+    private int bpSpace = (int) (Math.random() * 5);
+    private boolean isBroken = false;
+    private boolean isMineable = false;
+
     public Item(String name) {
         this.name = name;
-        this.longname=name;
+        this.longname = name;
     }
+
+
+    private int hp;
+
     public Item() {
 
+    }
+
+    public void setHp(int hp) {
+        if (hp <= 0) {
+            System.out.println("error hp can`t be less 0!");
+        }
+        this.hp = hp;
+    }
+
+
+    public void minusHp() {
+        this.hp = hp - 1;
+        if (hp == 0) {
+            System.out.println(getName() + " is broken");
+        }
+
+    }
+
+    public void BackPackSpace() {
+        this.bpSpace = bpSpace - 1;
+        if (bpSpace == 0) {
+            System.out.println("bag is full:(");
+        }return;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getBpSpace() {
+        return bpSpace;
     }
 
     public String getName() {
@@ -33,14 +70,15 @@ public class Item{
         isBroken = broken;
     }
 
-    public void changeLongname(DegreeOfBroke degreeOfBroke){
-        this.longname=degreeOfBroke.toString()+' '+longname;
+    public void changeLongname(DegreeOfBroke degreeOfBroke) {
+        this.longname = degreeOfBroke.toString() + ' ' + longname;
     }
 
     public String getLongname() {
         return longname;
     }
-    public int hashCode(){
+
+    public int hashCode() {
         return Objects.hash(getLongname(), getName());
     }
 

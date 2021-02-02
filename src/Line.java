@@ -3,4 +3,5 @@ public class Line extends Item implements Mineable {
         super(name);
         this.setMineable(true);
     }
+
 }

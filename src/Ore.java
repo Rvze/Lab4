@@ -1,11 +1,29 @@
-class GoldPiece extends Item implements Mineable  {
-    private double size; // size is the double in range of 0 to 10
+class Ore extends Item implements Mineable {
+    private String name;
+    private final int chance = (int) Math.random() * 12;
+    private final double size; // size is the double in range of 0 to 10
     private static int ind = 1;
 
-    GoldPiece() {
-        this.name = "piece" + ind++ + " of gold";
+
+    public String typeOfOre() {
+        String type;
+        if (chance >= 0 && chance < 3) {
+            type = "sand";
+        } else if (chance >= 3 && chance < 6) {
+            type = "rock";
+        } else if (chance >= 6 && chance < 9) {
+            type = "iron";
+        } else {
+            type = "gold";
+        }
+        return type;
+    }
+
+    Ore() {
+        this.name = "piece" + ind++ + " of " + typeOfOre();
         this.size = Math.random() * 10;
         this.setMineable(true);
+
     }
 
     public String sizeToString() {
@@ -25,4 +43,11 @@ class GoldPiece extends Item implements Mineable  {
         }
         return res.toString();
     }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+
 }

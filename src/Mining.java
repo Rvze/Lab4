@@ -1,4 +1,4 @@
 public interface Mining {
     boolean mine(Item item);
-    GoldPiece getGoldPieces(Item item);
+    Object getGoldPieces(Item item, Item use, Item bp);
 }
