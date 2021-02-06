@@ -35,12 +35,22 @@ public class Item {
 
     }
 
+    public void miinusHp() {
+        this.hp = hp - 1;
+        if (hp <= 0) {
+            System.out.println(getName() + " is broken");
+        }
+    }
+
     public void BackPackSpace() {
         this.bpSpace = bpSpace - 1;
         if (bpSpace == 0) {
             System.out.println("bag is full:(");
-        }return;
+        }
+
+
     }
+
 
     public int getHp() {
         return hp;
