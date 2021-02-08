@@ -1,12 +1,12 @@
 import java.util.Objects;
 
 public abstract class Character {
-    private String name;
+    private final String name;
     private TypeOfPerson type;
 
     public Character(String name, TypeOfPerson typeOfPerson) {
         this.name = name;
-        this.type = type;
+        this.type = typeOfPerson;
     }
 
     public String getName() {
@@ -30,4 +30,5 @@ public abstract class Character {
     public boolean equals(Object o) {
         return o instanceof Character && Objects.equals(getType(),getName());
     }
+
 }

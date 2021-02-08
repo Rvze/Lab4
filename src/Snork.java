@@ -3,9 +3,7 @@ import java.util.ArrayList;
 public class Snork extends Character implements Mining {
     ArrayList<String> inventory = new ArrayList<String>();
     private Item knife;
-    private Ore[] ores = new Ore[6];
-    private int oreCount = 0;
-    int chance = (int) Math.random() * 12;
+
 
     public Snork(String name, TypeOfPerson typeOfPerson) {
         super(name, typeOfPerson);
@@ -18,11 +16,11 @@ public class Snork extends Character implements Mining {
 
 
     @Override
-    public Item getGoldPieces(Item item, Item use, Item bp) {
+    public Item getOre(Item item, Item use, Item bp) {
         if (item.getHp() > 0 && use.getHp() > 0 && bp.getBpSpace() > 0) {
             if (item.isMineable() && Math.random() > 0.1d) {
                 Ore ore = new Ore();
-                System.out.println(getName() + " gets " + ore.sizeToString() + ' ' + ore.getName());
+                System.out.println(getName() + " gets " + ore.sizeToString() + ' ' + ore.getName() + ore.typeOfOre());
 
                 item.minusHp();  //knife hp
                 use.minusHp();  // line hp
@@ -31,7 +29,6 @@ public class Snork extends Character implements Mining {
                 bp.BackPackSpace(); //bpSpace
 
                 inventory.add(ore.sizeToString() + ' ' + ore.getName());   //инвентарь
-                addOre(ore);
 
                 return ore;
             } else return item;
@@ -55,12 +52,5 @@ public class Snork extends Character implements Mining {
         return knife;
     }
 
-
-    public void addOre(Ore ore) {
-        if (oreCount < Math.random() * 4) {
-            this.ores[oreCount] = ore;
-            oreCount++;
-        } else System.out.println("bag is full:(");
-    }
 
 }

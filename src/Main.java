@@ -11,12 +11,13 @@ public class Main {
         Snork snork = new Snork("Snork", TypeOfPerson.COLLECTOR);
         snork.toTakeKnife(knife);
 
-        Item bp = new Item("bp");
+        Item bp = new Item("backpack");
         Line line = new Line("line");
         line.setHp((int)(Math.random()*4+3));
+        bp.setBpSpace((int)(Math.random()*5+2));
         for (int i = 0; i < 6; i++) {
             if (snork.mine(line)) {
-                snork.getGoldPieces(line, snork.getKnife(),bp);
+                snork.getOre(line, snork.getKnife(),bp);
             }
         }
 
@@ -24,8 +25,8 @@ public class Main {
         snork.changeTypeOfPerson(TypeOfPerson.GOLDMINER);
 
         Sniff sniff = new Sniff("Sniff", TypeOfPerson.COLLECTOR);
-        sniff.wearItem(belt, Size.RIGHT_FOR_HIM);
-
+        sniff.wearItem(belt);
+        sniff.getType();
     }
 }
 

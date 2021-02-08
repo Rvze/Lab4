@@ -1,17 +1,17 @@
 class Ore extends Item implements Mineable {
     private String name;
-    //private final int chance = (int) Math.random() * 12;
     private final double size; // size is the double in range of 0 to 10
     private static int ind = 1;
+    private final int chance;
     Snork snork = new Snork("snork",TypeOfPerson.COLLECTOR);
 
     public String typeOfOre() {
         String type;
-        if (snork.chance >= 0 && snork.chance < 3) {
+        if (this.chance >= 0 && this.chance < 3) {
             type = "sand";
-        } else if (snork.chance >= 3 && snork.chance < 6) {
+        } else if (this.chance >= 3 && this.chance < 6) {
             type = "rock";
-        } else if (snork.chance >= 6 && snork.chance < 9) {
+        } else if (this.chance >= 6 && this.chance < 9) {
             type = "iron";
         } else {
             type = "gold";
@@ -20,8 +20,9 @@ class Ore extends Item implements Mineable {
     }
 
     Ore() {
-        this.name = "piece" + ind++ + " of " + typeOfOre();
+        this.name = "piece" + ind++ + " of " ;
         this.size = Math.random() * 10;
+        this.chance = (int) (Math.random()*20);
         this.setMineable(true);
 
     }

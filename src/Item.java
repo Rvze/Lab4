@@ -3,9 +3,9 @@ import java.util.Objects;
 public class Item {
     protected String name;
     private String longname;
-    private int bpSpace = (int) (Math.random() * 5);
     private boolean isBroken = false;
     private boolean isMineable = false;
+    private int bpSpace;
 
     public Item(String name) {
         this.name = name;
@@ -26,10 +26,18 @@ public class Item {
         this.hp = hp;
     }
 
+    public void setBpSpace(int bpSpace) {
+        if (bpSpace <= 0) {
+            System.out.println("error bpSpace can`t be less 0!");
+        }
+        this.bpSpace = bpSpace;
+    }
+
 
     public void minusHp() {
         this.hp = hp - 1;
         if (hp == 0) {
+            isBroken = true;
             System.out.println(getName() + " is broken");
         }
 
@@ -38,6 +46,7 @@ public class Item {
     public void miinusHp() {
         this.hp = hp - 1;
         if (hp <= 0) {
+            isBroken = true;
             System.out.println(getName() + " is broken");
         }
     }
@@ -59,6 +68,7 @@ public class Item {
     public int getBpSpace() {
         return bpSpace;
     }
+
 
     public String getName() {
         return name;
