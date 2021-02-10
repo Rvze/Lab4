@@ -1,9 +1,11 @@
 public class Main {
     public static void main(String[] args) {
         Item ship = new Item("ship");
+        ship.setHp((int)(Math.random()*10));
         Sea sea = new Sea("Sea");
         sea.destruct(ship, DegreeOfBroke.DESTRUCTS);
         Item belt = new Item("belt");
+        belt.setHp((int) (Math.random() * 10));
         sea.destruct(belt, DegreeOfBroke.CORRODES);
 
         Item knife = new Item("knife");

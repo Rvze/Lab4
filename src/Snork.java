@@ -28,7 +28,7 @@ public class Snork extends Character implements Mining {
 
                 bp.BackPackSpace(); //bpSpace
 
-                inventory.add(ore.sizeToString() + ' ' + ore.getName());   //инвентарь
+                inventory.add(ore.sizeToString() + ' ' + ore.getName() + ore.typeOfOre());   //инвентарь
 
                 return ore;
             } else return item;

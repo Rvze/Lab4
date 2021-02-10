@@ -1,21 +1,36 @@
 import java.util.Objects;
 
 public class Sea {
-    private String name;
-    public Sea(String name){
-        this.name=name;
+    private final String name;
+    public int dmg = (int) (Math.random()*3);
+
+    public Sea(String name) {
+        this.name = name;
     }
 
-    public void destruct(Item item, DegreeOfBroke degreeOfBroke){
+    public void destruct(Item item, DegreeOfBroke degreeOfBroke) {
         item.setBroken(true);
         item.changeLongname(degreeOfBroke);
-        System.out.println(getName()+' '+degreeOfBroke.toString()+' '+item.getName());
+        if (item.hp <= 0) {
+            degreeOfBroke = DegreeOfBroke.DESTRUCTS;
+        } else if (item.hp >= 2 && item.hp < 4) {
+            degreeOfBroke = DegreeOfBroke.BATTERED;
+        } else {
+            degreeOfBroke = DegreeOfBroke.CORRODES;
+        }
+        System.out.println(degreeOfBroke +" " + item.getName());
     }
+
     public String getName() {
         return name;
     }
-    public int hashCode(){
+
+    public int hashCode() {
         return Objects.hash(getName());
+    }
+
+    public void seaDamage(Item item) {
+        item.setHp(item.hp - dmg);
     }
 
     @Override

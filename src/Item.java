@@ -13,7 +13,7 @@ public class Item {
     }
 
 
-    private int hp;
+    public int hp ;
 
     public Item() {
 
@@ -43,13 +43,6 @@ public class Item {
 
     }
 
-    public void miinusHp() {
-        this.hp = hp - 1;
-        if (hp <= 0) {
-            isBroken = true;
-            System.out.println(getName() + " is broken");
-        }
-    }
 
     public void BackPackSpace() {
         this.bpSpace = bpSpace - 1;
@@ -107,7 +100,8 @@ public class Item {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
+        Item item;
+        item = (Item) o;
         return isBroken == item.isBroken &&
                 isMineable == item.isMineable &&
                 Objects.equals(name, item.name) &&
