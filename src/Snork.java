@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 
 public class Snork extends Character implements Mining {
-    ArrayList<String> inventory = new ArrayList<String>();
+    ArrayList<String> inventory = new ArrayList<String>(10);
+    private String inventorySize;
     private Item knife;
-
+    private int bpSpace;
 
     public Snork(String name, TypeOfPerson typeOfPerson) {
         super(name, typeOfPerson);
@@ -16,7 +17,7 @@ public class Snork extends Character implements Mining {
 
 
     @Override
-    public Item getOre(Item item, Item use, Item bp) {
+    public Item getOre(Item item, Item use, Snork bp) {
         if (item.getHp() > 0 && use.getHp() > 0 && bp.getBpSpace() > 0) {
             if (item.isMineable() && Math.random() > 0.1d) {
                 Ore ore = new Ore();
@@ -35,9 +36,39 @@ public class Snork extends Character implements Mining {
         } else return item;
     }
 
+    public void BackPackSpace() {
+        this.bpSpace = bpSpace - 1;
+        if (bpSpace == 0) {
+            System.out.println("bag is full:(");
+        }
+
+    }
+
+    public void setBpSpace(int bpSpace) {
+        if (bpSpace <= 0) {
+            System.out.println("error bpSpace can`t be less 0!");
+        }
+        this.bpSpace = bpSpace;
+    }
+
+    public void removeBpSpace() {
+        Ore ore = new Ore();
+        var s = ore.sizeToString() + ' ' + ore.getName() + ore.typeOfOre();
+        inventory.remove(s);
+        System.out.println("Snork has a:");
+        for (String a:inventory) {
+            System.out.println(a);
+        }
+    }
+
+    public int getBpSpace() {
+        return bpSpace;
+    }
+
+
     public void snorkInventory() {
         System.out.println("Snork has a:");
-        for (String s : inventory) {
+        for (var s : inventory) {
 
             System.out.println(s);
         }

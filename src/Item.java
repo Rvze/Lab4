@@ -5,7 +5,7 @@ public class Item {
     private String longname;
     private boolean isBroken = false;
     private boolean isMineable = false;
-    private int bpSpace;
+
 
     public Item(String name) {
         this.name = name;
@@ -26,12 +26,6 @@ public class Item {
         this.hp = hp;
     }
 
-    public void setBpSpace(int bpSpace) {
-        if (bpSpace <= 0) {
-            System.out.println("error bpSpace can`t be less 0!");
-        }
-        this.bpSpace = bpSpace;
-    }
 
 
     public void minusHp() {
@@ -44,23 +38,16 @@ public class Item {
     }
 
 
-    public void BackPackSpace() {
-        this.bpSpace = bpSpace - 1;
-        if (bpSpace == 0) {
-            System.out.println("bag is full:(");
-        }
 
 
-    }
+
+
 
 
     public int getHp() {
         return hp;
     }
 
-    public int getBpSpace() {
-        return bpSpace;
-    }
 
 
     public String getName() {

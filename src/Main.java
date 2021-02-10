@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         Item ship = new Item("ship");
-        ship.setHp((int)(Math.random()*10));
+        ship.setHp((int) (Math.random() * 10));
         Sea sea = new Sea("Sea");
         sea.destruct(ship, DegreeOfBroke.DESTRUCTS);
         Item belt = new Item("belt");
@@ -9,26 +9,28 @@ public class Main {
         sea.destruct(belt, DegreeOfBroke.CORRODES);
 
         Item knife = new Item("knife");
-        knife.setHp((int)(Math.random()*4+3));
+        knife.setHp((int) (Math.random() * 4 + 3));
         Snork snork = new Snork("Snork", TypeOfPerson.COLLECTOR);
         snork.toTakeKnife(knife);
 
-        Item bp = new Item("backpack");
+        Snork bp = new Snork("backpack",TypeOfPerson.COLLECTOR);
         Line line = new Line("line");
-        line.setHp((int)(Math.random()*4+3));
-        bp.setBpSpace((int)(Math.random()*5+2));
+        line.setHp((int) (Math.random() * 4 + 3));
+        bp.setBpSpace((int) (Math.random() * 5 + 2));
         for (int i = 0; i < 6; i++) {
             if (snork.mine(line)) {
-                snork.getOre(line, snork.getKnife(),bp);
+                snork.getOre(line, snork.getKnife(), bp);
             }
         }
-
+        Ore ore = new Ore();
         snork.snorkInventory();
+        bp.removeBpSpace();
+       // snork.snorkInventory();
+
         snork.changeTypeOfPerson(TypeOfPerson.GOLDMINER);
 
         Sniff sniff = new Sniff("Sniff", TypeOfPerson.COLLECTOR);
         sniff.wearItem(belt);
-        sniff.getType();
     }
 }
 

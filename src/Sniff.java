@@ -2,7 +2,6 @@ import java.lang.reflect.Type;
 
 public class Sniff extends Character {
     Item item;
-    private Size size;
     private final int sizeChance = (int) (Math.random() * 10);
     private TypeOfPerson typeOfPerson;
 
@@ -13,12 +12,13 @@ public class Sniff extends Character {
 
     public void wearItem(Item item) {
         this.item = item;
+        Size size;
         if (sizeChance >= 6) {
             size = Size.RIGHT_FOR_HIM;
         } else
             size = Size.NOT_RIGHT_FOR_HIM;
 
-        System.out.println(getName() + " wears " + item.getLongname() + " it is " +size);
+        System.out.println(getName() + " wears " + item.getLongname() + " it is " + size);
     }
 
 }
