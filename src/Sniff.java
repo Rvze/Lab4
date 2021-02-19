@@ -1,4 +1,5 @@
 import java.lang.reflect.Type;
+import java.util.Objects;
 
 public class Sniff extends Character {
     Item item;
@@ -21,4 +22,19 @@ public class Sniff extends Character {
         System.out.println(getName() + " wears " + item.getLongname() + " it is " + size);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Sniff sniff = (Sniff) o;
+        return sizeChance == sniff.sizeChance &&
+                item.equals(sniff.item) &&
+                typeOfPerson == sniff.typeOfPerson;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), item, sizeChance, typeOfPerson);
+    }
 }

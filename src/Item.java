@@ -13,7 +13,7 @@ public class Item {
     }
 
 
-    public int hp ;
+    public int hp;
 
     public Item() {
 
@@ -27,7 +27,6 @@ public class Item {
     }
 
 
-
     public void minusHp() {
         this.hp = hp - 1;
         if (hp == 0) {
@@ -38,16 +37,9 @@ public class Item {
     }
 
 
-
-
-
-
-
-
     public int getHp() {
         return hp;
     }
-
 
 
     public String getName() {

@@ -1,8 +1,10 @@
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Snork extends Character implements Mining {
     ArrayList<String> inventory = new ArrayList<String>(10);
-    private String inventorySize;
+    TypeOfPerson typeOfPerson;
     private Item knife;
     private int bpSpace;
 
@@ -56,7 +58,7 @@ public class Snork extends Character implements Mining {
         var s = ore.sizeToString() + ' ' + ore.getName() + ore.typeOfOre();
         inventory.remove(s);
         System.out.println("Snork has a:");
-        for (String a:inventory) {
+        for (String a : inventory) {
             System.out.println(a);
         }
     }
@@ -83,5 +85,15 @@ public class Snork extends Character implements Mining {
         return knife;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null ||getClass() != o.getClass()) return false;
+        return Objects.equals(getName(), ((Snork) o).getName()) && Objects.equals(getType(), ((Snork) o).getType()) && Objects.equals(getKnife(), ((Snork) o).getKnife()) && Objects.equals(getBpSpace(), ((Snork) o).getBpSpace()) && Objects.equals(getClass(), ((Snork) o).getClass());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), inventory, knife, bpSpace);
+    }
 }

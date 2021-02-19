@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 class Ore extends Item implements Mineable {
     private String name;
     private final double size; // size is the double in range of 0 to 10
@@ -50,5 +52,20 @@ class Ore extends Item implements Mineable {
         return name;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Ore ore = (Ore) o;
+        return Double.compare(ore.size, size) == 0 &&
+                chance == ore.chance &&
+                name.equals(ore.name) &&
+                snork.equals(ore.snork);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), name, size, chance, snork);
+    }
 }

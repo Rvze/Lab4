@@ -31,6 +31,7 @@ public class Main {
 
         Sniff sniff = new Sniff("Sniff", TypeOfPerson.COLLECTOR);
         sniff.wearItem(belt);
+
     }
 }
 
