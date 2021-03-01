@@ -3,6 +3,7 @@ import java.util.Objects;
 public class Sea {
     private final String name;
     public int dmg = (int) (Math.random()*3);
+    private boolean calm;
 
     public Sea(String name) {
         this.name = name;
@@ -19,6 +20,12 @@ public class Sea {
             degreeOfBroke = DegreeOfBroke.CORRODES;
         }
         System.out.println(degreeOfBroke +" " + item.getName());
+    }
+    public String condition(boolean calm){
+        if (calm){
+            return "calm";
+        }
+        return "not calm";
     }
 
     public String getName() {

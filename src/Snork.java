@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Snork extends Character implements Mining {
     ArrayList<String> inventory = new ArrayList<String>(10);
+    private Place place = Place.UNKNOWN;
     TypeOfPerson typeOfPerson;
     private Item knife;
     private int bpSpace;
@@ -36,6 +37,27 @@ public class Snork extends Character implements Mining {
                 return ore;
             } else return item;
         } else return item;
+    }
+
+    public boolean crumbledUp() {
+        if (Math.random() * 10 >= 5) {
+
+            System.out.println("Snork crumbled up to the top of the cliff and looked around");
+            return true;
+        } else
+            return false;
+    }
+
+    public void see(String isle, Sea sea, Sniff sniff, Item item, Snusmoomrik hat) {
+
+        while (!crumbledUp()) {
+            System.out.println(isle + " swung open in front of " + getName() + " and seemed like a bouquet of flowers floating to " + sea.condition(true) + " " + sea.getName());
+            if(Math.random()*10>=3){
+                sniff.wearItem(item);
+            }
+            hat.flashed();
+        }
+            System.out.println("Snork slipped and fell ");
     }
 
     public void BackPackSpace() {
@@ -88,7 +110,7 @@ public class Snork extends Character implements Mining {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null ||getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         return Objects.equals(getName(), ((Snork) o).getName()) && Objects.equals(getType(), ((Snork) o).getType()) && Objects.equals(getKnife(), ((Snork) o).getKnife()) && Objects.equals(getBpSpace(), ((Snork) o).getBpSpace()) && Objects.equals(getClass(), ((Snork) o).getClass());
     }
 
