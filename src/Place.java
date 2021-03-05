@@ -7,5 +7,7 @@ public enum Place {
     }},
     UNKNOWN{public String toString(){
         return "unknown";
-    }};
+    }},
+    ISLAND{public String toString(){return "isle";}};
+
 }

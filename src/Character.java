@@ -9,6 +9,8 @@ public abstract class Character {
         this.type = typeOfPerson;
     }
 
+
+
     public String getName() {
         return name;
     }

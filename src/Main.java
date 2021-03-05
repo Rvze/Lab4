@@ -4,7 +4,10 @@ public class Main {
         Sea sea = new Sea("Sea");
         Sniff sniff = new Sniff("Sniff", TypeOfPerson.COLLECTOR);
         Item belt = new Item("belt");
-        snork.see("island", sea, sniff, belt);
+        Snusmoomrik hat = new Snusmoomrik("hat", "Snusmoomrik");
+        Hemul hemul = new Hemul("Hemul", TypeOfPerson.COLLECTOR);
+        Ore rock = new Ore("rock");
+        snork.see(Place.ISLAND, sea, sniff, belt,hat ,hemul, rock);
 
         Item ship = new Item("ship");
         ship.setHp((int) (Math.random() * 10));

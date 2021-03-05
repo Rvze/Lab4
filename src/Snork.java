@@ -40,7 +40,7 @@ public class Snork extends Character implements Mining {
     }
 
     public boolean crumbledUp() {
-        if (Math.random() * 10 >= 5) {
+        if (Math.random() * 10 >= 3) {
 
             System.out.println("Snork crumbled up to the top of the cliff and looked around");
             return true;
@@ -48,17 +48,25 @@ public class Snork extends Character implements Mining {
             return false;
     }
 
-    public void see(String isle, Sea sea, Sniff sniff, Item item, Snusmoomrik hat) {
-
-        while (!crumbledUp()) {
-            System.out.println(isle + " swung open in front of " + getName() + " and seemed like a bouquet of flowers floating to " + sea.condition(true) + " " + sea.getName());
-            if(Math.random()*10>=3){
-                sniff.wearItem(item);
-            }
-            hat.flashed();
+    public void see(Place isle, Sea sea, Sniff sniff, Item item, Snusmoomrik hat, Hemul hemul, Ore ore) {
+        if (crumbledUp()) {
+            System.out.println(isle + " swung open in front of " + getName() + " and seemed like a bouquet of flowers floating to " + sea.condition(false) + " " + sea.getName());
+        } else
+            System.out.println("Snork slipped and fell");
+        if (Math.random() * 10 >= 3) {
+            sniff.wearItem(item);
         }
-            System.out.println("Snork slipped and fell ");
+        hat.flashed(hat.getHat(), hat.getName());
+        hemul.dig("rare", "ladys slipper");
+
+        /**
+         * Предложение с молнией, с шансом на попадание.
+         */
+        System.out.println("Struck by lightning");
+        ore.split(Size.TEN_MOOMI_HOUSE);
+
     }
+
 
     public void BackPackSpace() {
         this.bpSpace = bpSpace - 1;

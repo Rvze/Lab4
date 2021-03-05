@@ -1,11 +1,26 @@
 import java.util.Objects;
 
-class Ore extends Item implements Mineable {
+class Ore extends Item implements Mineable{
     private String name;
-    private final double size; // size is the double in range of 0 to 10
+    private volatile int hp = 10;
+    private double size; // size is the double in range of 0 to 10
     private static int ind = 1;
-    private final int chance;
+    private int chance;
+
+
+    public Ore(String name){
+        this.name = name;
+    }
+
     Snork snork = new Snork("snork",TypeOfPerson.COLLECTOR);
+
+    public void split (Size size){
+        int dmg = (int) (Math.random()*16+8);
+        if (chance -dmg <=0) {
+            System.out.println(getName()+" "+size+" split");
+        }else
+            System.out.println("lightning hit by ");
+    }
 
     public String typeOfOre() {
         String type;
