@@ -9,8 +9,6 @@ public abstract class Character {
         this.type = typeOfPerson;
     }
 
-
-
     public String getName() {
         return name;
     }
@@ -24,13 +22,13 @@ public abstract class Character {
     public TypeOfPerson getType() {
         return type;
     }
-    public int hashCode(){
-        return Objects.hash(getName(),getType());
+
+    public int hashCode() {
+        return Objects.hash(getName(), getType());
     }
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof Character && Objects.equals(getType(),getName());
+        return o instanceof Character && Objects.equals(getType(), getName());
     }
-
 }

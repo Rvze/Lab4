@@ -11,9 +11,8 @@ public enum DegreeOfBroke {
     },
 
     BATTERED {
-        public String toString(){
+        public String toString() {
             return "the sea is battered";
         }
     }
-    };
-
+};

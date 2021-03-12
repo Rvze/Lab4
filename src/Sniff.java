@@ -1,20 +1,24 @@
-import java.lang.reflect.Type;
 import java.util.Objects;
 
 public class Sniff extends Character {
     Item item;
-    private final int sizeChance = (int) (Math.random() * 10);
-    private TypeOfPerson typeOfPerson;
+    // Реализация Singleton
+    private static Sniff sniff;
 
-    public Sniff(String name, TypeOfPerson typeOfPerson) {
-        super(name, typeOfPerson);
-        typeOfPerson = TypeOfPerson.COLLECTOR;
+    private Sniff() {
+        super("Sniff", TypeOfPerson.COLLECTOR);
+    }
+
+    public static Sniff get() {
+        if (sniff == null)
+            sniff = new Sniff();
+        return sniff;
     }
 
     public void wearItem(Item item) {
         this.item = item;
         Size size;
-        if (sizeChance >= 6) {
+        if (item.getSize() >= 6) {
             size = Size.RIGHT_FOR_HIM;
         } else
             size = Size.NOT_RIGHT_FOR_HIM;
@@ -24,17 +28,16 @@ public class Sniff extends Character {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o)
+            return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Sniff sniff = (Sniff) o;
-        return sizeChance == sniff.sizeChance &&
-                item.equals(sniff.item) &&
-                typeOfPerson == sniff.typeOfPerson;
+        return item.equals(sniff.item) && getType() == sniff.getType();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), item, sizeChance, typeOfPerson);
+        return Objects.hash(super.hashCode(), item, getType());
     }
 }

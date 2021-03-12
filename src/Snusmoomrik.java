@@ -1,17 +1,16 @@
 public class Snusmoomrik extends Character {
-    private String hat;
+    private final Item hat;
 
-    public Snusmoomrik(String hat, String name) {
+    public Snusmoomrik(Item hat, String name) {
         super(name, TypeOfPerson.COMMON);
         this.hat = hat;
     }
 
-    public void flashed(String name, String hat) {
-        System.out.println(getName() + " " + getHat() + " flashed");
+    public void flashed() {
+        System.out.println(getName() + "'s " + getHat().getName() + " flashed");
     }
 
-    public String getHat() {
+    public Item getHat() {
         return hat;
     }
-
 }

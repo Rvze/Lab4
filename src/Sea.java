@@ -2,7 +2,7 @@ import java.util.Objects;
 
 public class Sea {
     private final String name;
-    public int dmg = (int) (Math.random()*3);
+    public int dmg = (int) (Math.random() * 3);
     private boolean calm;
 
     public Sea(String name) {
@@ -12,17 +12,18 @@ public class Sea {
     public void destruct(Item item, DegreeOfBroke degreeOfBroke) {
         item.setBroken(true);
         item.changeLongname(degreeOfBroke);
-        if (item.hp <= 0) {
+        if (item.getHp() <= 0) {
             degreeOfBroke = DegreeOfBroke.DESTRUCTS;
-        } else if (item.hp >= 2 && item.hp < 4) {
+        } else if (item.getHp() >= 2 && item.getHp() < 4) {
             degreeOfBroke = DegreeOfBroke.BATTERED;
         } else {
             degreeOfBroke = DegreeOfBroke.CORRODES;
         }
-        System.out.println(degreeOfBroke +" " + item.getName());
+        System.out.println(degreeOfBroke + " " + item.getName());
     }
-    public String condition(boolean calm){
-        if (calm){
+
+    public String condition(boolean calm) {
+        if (calm) {
             return "calm";
         }
         return "not calm";
@@ -37,7 +38,7 @@ public class Sea {
     }
 
     public void seaDamage(Item item) {
-        item.setHp(item.hp - dmg);
+        item.setHp(item.getHp() - dmg);
     }
 
     @Override

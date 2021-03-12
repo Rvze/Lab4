@@ -1,7 +1,6 @@
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Objects;
-
 public class Snork extends Character implements Mining {
     ArrayList<String> inventory = new ArrayList<String>(10);
     private Place place = Place.UNKNOWN;
@@ -13,11 +12,14 @@ public class Snork extends Character implements Mining {
         super(name, typeOfPerson);
     }
 
+    public void getIn(Place place){
+        this.place = place;
+        System.out.println(getName()+ " get in to "+place.getUrl());
+    }
     @Override
     public boolean mine(Item item) {
         return item.isMineable();
     }
-
 
     @Override
     public Item getOre(Item item, Item use, Snork bp) {
@@ -26,13 +28,12 @@ public class Snork extends Character implements Mining {
                 Ore ore = new Ore();
                 System.out.println(getName() + " gets " + ore.sizeToString() + ' ' + ore.getName() + ore.typeOfOre());
 
-                item.minusHp();  //knife hp
-                use.minusHp();  // line hp
-
+                item.minusHp(); //knife hp
+                use.minusHp(); // line hp
 
                 bp.BackPackSpace(); //bpSpace
 
-                inventory.add(ore.sizeToString() + ' ' + ore.getName() + ore.typeOfOre());   //инвентарь
+                inventory.add(ore.sizeToString() + ' ' + ore.getName() + ore.typeOfOre()); //инвентарь
 
                 return ore;
             } else return item;
@@ -48,7 +49,7 @@ public class Snork extends Character implements Mining {
             return false;
     }
 
-    public void see(Place isle, Sea sea, Sniff sniff, Item item, Snusmoomrik hat, Hemul hemul, Ore ore) {
+    public void see(String isle, Sea sea, Sniff sniff, Item item, Snusmoomrik hat, Hemul hemul, Ore ore) {
         if (crumbledUp()) {
             System.out.println(isle + " swung open in front of " + getName() + " and seemed like a bouquet of flowers floating to " + sea.condition(false) + " " + sea.getName());
         } else
@@ -56,17 +57,16 @@ public class Snork extends Character implements Mining {
         if (Math.random() * 10 >= 3) {
             sniff.wearItem(item);
         }
-        hat.flashed(hat.getHat(), hat.getName());
+        hat.flashed();
         hemul.dig("rare", "ladys slipper");
 
-        /**
-         * Предложение с молнией, с шансом на попадание.
-         */
+/**
+ * Предложение с молнией, с шансом на попадание.
+ */
         System.out.println("Struck by lightning");
         ore.split(Size.TEN_MOOMI_HOUSE);
 
     }
-
 
     public void BackPackSpace() {
         this.bpSpace = bpSpace - 1;
@@ -85,7 +85,7 @@ public class Snork extends Character implements Mining {
 
     public void removeBpSpace() {
         Ore ore = new Ore();
-        var s = ore.sizeToString() + ' ' + ore.getName() + ore.typeOfOre();
+        String s = ore.sizeToString() + ' ' + ore.getName() + ore.typeOfOre();
         inventory.remove(s);
         System.out.println("Snork has a:");
         for (String a : inventory) {
@@ -97,10 +97,9 @@ public class Snork extends Character implements Mining {
         return bpSpace;
     }
 
-
     public void snorkInventory() {
         System.out.println("Snork has a:");
-        for (var s : inventory) {
+        for (String s : inventory) {
 
             System.out.println(s);
         }

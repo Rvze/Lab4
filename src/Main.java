@@ -1,15 +1,67 @@
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SizeException {
         Snork snork = new Snork("Snork", TypeOfPerson.COLLECTOR);
         Sea sea = new Sea("Sea");
-        Sniff sniff = new Sniff("Sniff", TypeOfPerson.COLLECTOR);
-        Item belt = new Item("belt");
-        Snusmoomrik hat = new Snusmoomrik("hat", "Snusmoomrik");
+        Item belt = new Item("belt", 10);
+        Snusmoomrik snusmoomrik = new Snusmoomrik(new Item("hat", 10), "Snusmoomrik");
         Hemul hemul = new Hemul("Hemul", TypeOfPerson.COLLECTOR);
-        Ore rock = new Ore("rock");
-        snork.see(Place.ISLAND, sea, sniff, belt,hat ,hemul, rock);
+        Ore rock = new Ore();
+        snork.see(Place.ISLAND.getUrl(), sea, Sniff.get(), belt, snusmoomrik, hemul, rock);
+        Place overThere = Place.OVER_THERE;
+        Lightning.struck(overThere);
 
-        Item ship = new Item("ship");
+        class StoneBlock extends Item implements Destroyable {
+            public StoneBlock(String name, int size) throws SizeException {
+                super(name, size);
+            }
+
+            @Override
+            public StoneBlock[] destroy() {
+                setHp(2);
+                minusHp();
+                minusHp();
+                StoneBlock[] stoneBlocks = new StoneBlock[2];
+                double sizeProportions = Math.random();
+                if(sizeProportions ==0){
+                    throw new ProportionException("Proportion can`t be equal 0!");
+                }
+                try {
+                    stoneBlocks[0] = new StoneBlock("stone block 1", (int) (getSize() * sizeProportions));
+                    stoneBlocks[1] = new StoneBlock("stone block 2", getSize() - stoneBlocks[0].getSize());
+                } catch (SizeException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(getName() + "Big stone block with size " + getSize() + " destroyed to 2 stone blocks with sizes " + stoneBlocks[0].getSize() + " and " + stoneBlocks[1].getSize());
+                return stoneBlocks;
+            }
+
+
+        }
+
+        StoneBlock stoneBlock = new StoneBlock("stone block", 20);
+        StoneBlock[] stoneBlocks;
+        stoneBlocks = (StoneBlock[]) Lightning.struck(stoneBlock);
+
+        CreateGorge createGorge = new CreateGorge() {
+            @Override
+            public Place createGorge(Item[] items) {
+                if (items.length == 2) {
+                    System.out.println(items[0].getName() + " and " + items[1].getName() + " creates a gorge");
+                    return Place.GORGE;
+                } else
+                    return null;
+            }
+        };
+        Place gorge = createGorge.createGorge(stoneBlocks);
+        if (gorge != null) {
+            System.out.println("We have " + gorge.getUrl() + " there");
+            snork.getIn(gorge);
+        }
+
+        System.out.println();
+        System.out.println("\n\n\n");
+
+        Item ship = new Item("ship", 10);
         ship.setHp((int) (Math.random() * 10));
 
         sea.destruct(ship, DegreeOfBroke.DESTRUCTS);
@@ -17,7 +69,7 @@ public class Main {
         belt.setHp((int) (Math.random() * 10));
         sea.destruct(belt, DegreeOfBroke.CORRODES);
 
-        Item knife = new Item("knife");
+        Item knife = new Item("knife", 10);
         knife.setHp((int) (Math.random() * 4 + 3));
 
         snork.toTakeKnife(knife);
@@ -35,14 +87,25 @@ public class Main {
         Ore ore = new Ore();
         snork.snorkInventory();
         bp.removeBpSpace();
-        // snork.snorkInventory();
+// snork.snorkInventory();
 
         snork.changeTypeOfPerson(TypeOfPerson.GOLDMINER);
 
+        Sniff.get().wearItem(belt);
 
-        sniff.wearItem(belt);
+    }
 
+    public static class Lightning {
+        private static final String name = "Lightning";
 
+        static void struck(Place place) {
+            System.out.println(name + " struck " + place.getUrl() + " and change the electric charge to " + place.getElectricCharge());
+            place.addElectricCharge(place.getElectricCharge());
+        }
+        static Object[] struck(Destroyable destroyable){
+            System.out.println(name + " struck " + " and destroy " +destroyable.getClass().getSimpleName());
+            return destroyable.destroy();
+        }
     }
 }
 

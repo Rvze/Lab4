@@ -5,18 +5,25 @@ public class Item {
     private String longname;
     private boolean isBroken = false;
     private boolean isMineable = false;
+    private int size;
+    private int hp;
 
+    public Item(String name, int size) throws SizeException {
+        this.name = name;
+        this.longname = name;
+        if(size<=0){
+            throw new SizeException("Size is can`t be less than 0");
+        }
+        else
+            this.size=size;
+    }
+
+    public Item() {
+    }
 
     public Item(String name) {
         this.name = name;
-        this.longname = name;
-    }
-
-
-    public int hp;
-
-    public Item() {
-
+        size=(int)(Math.random()*10);
     }
 
     public void setHp(int hp) {
@@ -25,7 +32,6 @@ public class Item {
         }
         this.hp = hp;
     }
-
 
     public void minusHp() {
         this.hp = hp - 1;
@@ -36,11 +42,9 @@ public class Item {
 
     }
 
-
     public int getHp() {
         return hp;
     }
-
 
     public String getName() {
         return name;
@@ -52,10 +56,6 @@ public class Item {
 
     public void setMineable(boolean mineable) {
         isMineable = mineable;
-    }
-
-    public boolean isBroken() {
-        return isBroken;
     }
 
     public void setBroken(boolean broken) {
@@ -70,10 +70,20 @@ public class Item {
         return longname;
     }
 
+    public void setSize(int size) throws SizeException {
+        if(size<=0)
+            throw new SizeException();
+        else
+            this.size = size;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
     public int hashCode() {
         return Objects.hash(getLongname(), getName());
     }
-
 
     @Override
     public boolean equals(Object o) {
